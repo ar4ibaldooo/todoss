@@ -1,11 +1,23 @@
 <template>
     <li>
+        <div v-if="!editing">
         <span v-bind:class="{done: todoItem.completed}">
             <input type="checkbox" v-on:change="markComplete">
-            <strong>{{index + 1}}</strong>
+
             {{todoItem.title}}
         </span>
-        <button class="rm" v-on:click="$emit('removeTodoItem', todoItem.id)">&times;</button>
+        </div>
+        <div v-if="editing">
+        <span v-bind:class="{done: todoItem.completed}">
+            <input type="checkbox" v-on:change="markComplete">
+
+            <form v-on:keyup.enter="edit(todoLocal)">
+                <input type="text" id="edit" class="edit-todo" placeholder="What needs to be done?" v-model="todoLocal.title">
+            </form>
+        </span>
+
+        </div>
+        <button class="rm" v-on:click="removeTodoItem(todoItem.id)">&times;</button>
     </li>
 </template>
 <script>
@@ -19,6 +31,7 @@
         },
         data() {
             return {
+                editing: true,
                 todoLocal: this.todoItem,
             };
         },
@@ -27,13 +40,25 @@
             markComplete() {
                 this.todoLocal.completed = !this.todoLocal.completed;
             },
+            removeTodoItem(id) {
+                this.$store.dispatch('DELETE_TODO_ACTION', id)
+                console.log(id)
+            },
+            edit(editTodo) {
+               /* if (this.title.trim()) */{
+
+
+                    this.$store.dispatch('EDIT_ACTION',editTodo)
+
+                }
+            }
         },
 
     }
 
 </script>
 <style scoped>
-    li {
+/*    li {
         border: 1px solid #ccc;
         display: flex;
         justify-content: space-between;
@@ -50,5 +75,5 @@
     }
     input {
     margin-right: 1rem;
-    }
+    }*/
 </style>

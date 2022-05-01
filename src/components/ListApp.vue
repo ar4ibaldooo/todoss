@@ -5,10 +5,10 @@
         <ul id="todoListView" class="todo-list">
 
             <ItemApp
-            v-for="(todoItem, i)  of $store.getters.getTodos"  :key="todoItem.id"
+            v-for="(todoItem, i)  of $store.getters.TODOS"  :key="todoItem.id"
             v-bind:todoItem="todoItem"
             v-bind:index="i"
-            v-on:removeTodoItem="removeTodoItem"
+
             />
         </ul>
     </section>
@@ -21,16 +21,13 @@
             ItemApp
         },
         methods: {
-            removeTodoItem(id) {
-                this.$emit('remove-todo', id)
-            }
         }
     }
 </script>
 <style scoped>
-    ul {
+  /*  ul {
         list-stile: none;
         margin: 0;
         padding: 0;
-    }
+    }*/
 </style>

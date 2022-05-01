@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="onSubmit">
+    <form v-on:keyup.enter="add">
         <input type="text" id="newTodo" class="new-todo" placeholder="What needs to be done?" v-model="title">
     </form>
 </template>
@@ -11,14 +11,17 @@ export default {
         }
     },
     methods: {
-        onSubmit() {
+        add() {
           if (this.title.trim()) {
               const newTodo = {
                   id: Date.now(),
                   title: this.title,
                   complited: false
               }
-              this.$emit("add-todo", newTodo)
+              /*this.$emit("add-todo", newTodo)
+              this.title = ''*/
+              /*console.log(newTodo)*/
+              this.$store.dispatch('SAVE_TODO',newTodo)
               this.title = ''
           }
         }

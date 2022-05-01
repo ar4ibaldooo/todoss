@@ -3,15 +3,9 @@
     <section class="todoapp">
       <header class="header">
         <h1>todo list</h1>
-          <AddApp
-            @add-todo="addTodo"
-          />
+          <AddApp/>
       </header>
-
-          <ListApp
-          v-bind:todos="todos"
-          @remove-todo="removeTodoItem"
-          />
+          <ListApp/>
 
 
       <footer class="footer">
@@ -42,15 +36,10 @@ export default {
   name: 'App',
   data () {
       return {
-
       }
-  },
-  mounted() {
-    this.$store.dispatch()
+
   },
   methods: {
-
-
   },
   components: {
     ListApp,
